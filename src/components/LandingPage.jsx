@@ -23,7 +23,7 @@ function LandingPage() {
             
                 <ul class="custom-list">
                     <li><Link style={{ color: "white", textDecoration: "none" }} to="/pacman">Play</Link></li>
-                    <li><Link style={{ color: "white", textDecoration: "none" }} to="/story">Story</Link></li>
+                    <li><Link style={{ color: "white", textDecoration: "none" }} to="/story1">Story</Link></li>
 
                 </ul>
                 <p style={{ fontSize: "24px", textAlign: "center" }}>PumpMan: Chompong Through Fear,more Candy at a Time!</p>

@@ -10,6 +10,7 @@ import { MdOutlineCircle } from "react-icons/md";
 import { FiArrowDownCircle } from "react-icons/fi";
 import { TiArrowBack } from "react-icons/ti";
 import HeartIcon from './HeartIcon';
+import { FaRegCirclePlay } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
 const GameBoard = () => {
@@ -296,6 +297,9 @@ const GameBoard = () => {
     return classes.join(' ');
   };
 
+  const handleStartGame = () => {
+    setGameStarted(true);
+  };
   const renderLives = () => {
     const hearts = [];
     for (let i = 0; i < gameState.lives; i++) {
@@ -306,8 +310,8 @@ const GameBoard = () => {
 
 
   return (
-    <div style={{paddingTop:"30px"}}>
-      <h1 style={{fontSize:"30px",color:"yellowgreen",borderBottom:"5px solid yellowgreen",width:"max-content",paddingBottom:"10px"}}>Pacman Game</h1>
+    <div style={{paddingTop:"50px"}}>
+      {/* <h1 style={{fontSize:"30px",color:"yellowgreen",borderBottom:"5px solid yellowgreen",width:"max-content",paddingBottom:"10px"}}>Pacman Game</h1> */}
       <div
         className="game-board"
         style={{
@@ -379,13 +383,14 @@ const GameBoard = () => {
         })}
       </div>
 
+      {!gameStarted && <div style={{alignItems:"center",gap:"10px",justifyContent:"center",marginTop:"20px"}} className="start-message-mobile">Click <span style={{display:"flex",alignItems:"center",gap:"10px"}}> <FaRegCirclePlay style={{fontSize:"30px"}}/> button</span> to Start</div>}
 
 
       <div className="controls" style={{ marginTop: '20px' }}>
         <button className='control-button button-up' onClick={() => setDirection('UP')}><FiArrowUpCircle /></button>
         <div className='center-buttons'>
           <button className='control-button button-left' onClick={() => setDirection('LEFT')}><FiArrowLeftCircle /></button>
-          <button className='control-button'><MdOutlineCircle /></button>
+          <button className='control-button' onClick={handleStartGame}><FaRegCirclePlay /></button>
           <button className='control-button button-right' onClick={() => setDirection('RIGHT')}><FiArrowRightCircle /></button>
         </div>
         <button className='control-button button-down' onClick={() => setDirection('DOWN')}><FiArrowDownCircle /></button>

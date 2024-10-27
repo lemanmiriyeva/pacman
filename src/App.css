@@ -6,7 +6,16 @@
 body{
   background-color: #000 !important;
   color: #fff !important;
+  box-sizing: border-box;
+  overflow: hidden;
   font-family: "Poppins", serif;
+}
+.story-body{
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  overflow-y: auto; /* Enable vertical scrolling */
+  position: relative; /* Ensure the positioning context */
 }
 .ghost,.pacman{
   z-index: 10000000000 !important;
@@ -21,8 +30,20 @@ body{
 h2{
   font-size: 28px;
 }
-.start-message{
+.start-message,.start-message-mobile{
+  text-align: center;
   color: yellow;
+  animation: blinkText 1s infinite;
+}
+.start-message-mobile{
+  display: none !important;
+}
+@media(max-width:767px){
+  .start-message-mobile{
+    display: flex !important;
+  }
+}
+.start-button{
   animation: blinkText 1s infinite;
 }
 .start-message span{
@@ -345,6 +366,9 @@ h2{
 
 
 @media(max-width:767px){
+  .start-message{
+    display: none;
+  }
   .landing-header{
     flex-direction: column;
     gap: 0 !important;
@@ -480,7 +504,7 @@ h2{
 
 .story{
   width: 100%;
-  height:160vh;
+  /* height:160vh; */
   object-fit: contain;
 }
 .back{
@@ -493,6 +517,20 @@ h2{
   text-decoration: none;
   color: #fff;
   gap: 10px;
+}
+.back-story{
+  left: 10px;
+  bottom: 20px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  gap: 10px;
+  position: fixed;
+  padding: 10px 20px;
+  width: max-content;
+  background: #171515;
 }
 @media(max-width:767px){
   .back{
