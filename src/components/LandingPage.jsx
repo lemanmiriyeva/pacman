@@ -1,0 +1,38 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+function LandingPage() {
+    return (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "40px", flexDirection: "column" }}>
+            <div className='landing-header' style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "40px", textAlign: "center" }}>
+                <div>
+                    <h2 style={{ marginBottom: "0", color: "#D22B2B" }}>1UP</h2>
+                    <h2 style={{ marginTop: "0", color: "#fff" }}>00</h2>
+                </div>
+                <div>
+                    <h2 style={{ marginBottom: "0", color: "#D22B2B" }}>HIGH SCORE</h2>
+                    <h2 style={{ marginTop: "0", color: "#fff" }}>100000</h2>
+                </div>
+                <div>
+                    <h2 style={{ marginBottom: "0", color: "#D22B2B" }}>1UP</h2>
+                    <h2 style={{ marginTop: "0", color: "#fff" }}>00</h2>
+                </div>
+            </div>
+            <img className='logo' style={{ width: "25%", height: "25%" }} src="/logo1.jpeg" alt="" />
+            <div className='buttons' style={{ display: "flex", flexDirection: "column", width: "35%" }}>
+            
+                <ul class="custom-list">
+                    <li><Link style={{ color: "white", textDecoration: "none" }} to="/pacman">Play</Link></li>
+                    <li><Link style={{ color: "white", textDecoration: "none" }} to="/story">Story</Link></li>
+
+                </ul>
+                <p style={{ fontSize: "24px", textAlign: "center" }}>PumpMan: Chompong Through Fear,more Candy at a Time!</p>
+            </div>
+            <img className='moving-icon' style={{width:"100px",height:"100px"}} src="/icon.jpeg" alt="" />
+            <img className='moving-icon2' style={{width:"100px",height:"100px"}} src="/icon2.jpeg" alt="" />
+            <img className='moving-icon3' style={{width:"100px",height:"100px"}} src="/icon3.jpeg" alt="" />
+        </div>
+    )
+}
+
+export default LandingPage

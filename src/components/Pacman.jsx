@@ -10,7 +10,7 @@ const Pacman = ({ position, isInvincible, direction }) => {
   return (
 
      <img
-      src="/game.png"
+      src="/game.jpeg"
       alt="Pacman"
       style={{
         width: '100%',
@@ -20,7 +20,7 @@ const Pacman = ({ position, isInvincible, direction }) => {
         opacity: isInvincible ? 0.5 : 1,  
         filter: isInvincible ? 'brightness(0.8)' : 'none',  
            opacity: isInvincible ? 0.5 : 1,
-      transform: rotation[direction], 
+      transform: `${rotation[direction]} scale(1.4)`,
       gridRowStart: position.y + 1,
       gridColumnStart: position.x + 1,
       zIndex:"1000"

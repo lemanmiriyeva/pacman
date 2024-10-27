@@ -8,7 +8,9 @@ import { FiArrowRightCircle } from "react-icons/fi";
 import { FiArrowUpCircle } from "react-icons/fi";
 import { MdOutlineCircle } from "react-icons/md";
 import { FiArrowDownCircle } from "react-icons/fi";
+import { TiArrowBack } from "react-icons/ti";
 import HeartIcon from './HeartIcon';
+import { Link } from 'react-router-dom';
 
 const GameBoard = () => {
   const [gameState, setGameState] = useState(initializeGame());
@@ -304,7 +306,8 @@ const GameBoard = () => {
 
 
   return (
-    <div>
+    <div style={{paddingTop:"30px"}}>
+      <h1 style={{fontSize:"30px",color:"yellowgreen",borderBottom:"5px solid yellowgreen",width:"max-content",paddingBottom:"10px"}}>Pacman Game</h1>
       <div
         className="game-board"
         style={{
@@ -353,19 +356,8 @@ const GameBoard = () => {
                 ) : null
               ))}
               {isDot && (
-                <div
-                  style={{
-                    backgroundColor: 'yellow',
-                    borderRadius: '50%',
-                    width: '25%', 
-                    height: '25%',
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: 0,
-                  }}
-                />
+             
+                <img style={{width:"100%",height:"100%"}} src="/dot.jpeg"/>
               )}
               {isDying && isPacman && (
                 <div
@@ -398,9 +390,10 @@ const GameBoard = () => {
         </div>
         <button className='control-button button-down' onClick={() => setDirection('DOWN')}><FiArrowDownCircle /></button>
       </div>
+      <Link to={"/"} className="back"><TiArrowBack style={{fontSize:"50px"}}/>Back</Link>
 
       {!gameStarted && <div className="start-message">Press <span>SPACE</span> to Start</div>}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "40px" }}>
+      <div className='info' style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "40px" }}>
         <div className="score">
           <h3>Score: <span>{gameState.score}</span></h3>
         </div>

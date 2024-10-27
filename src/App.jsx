@@ -1,15 +1,21 @@
-// src/App.jsx
-
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
 import GameBoard from './components/GameBoard';
-import './App.css';
+import './App.css'
+import Story from './components/Story';
 
 const App = () => {
   return (
-    <div className="App" style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Pac-Man Game</h1>
-      <GameBoard />
-    </div>
+    <Router>
+    
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/pacman" element={<GameBoard />} />
+        <Route path="/story" element={<Story />} />
+        
+      </Routes>
+    </Router>
   );
 };
 

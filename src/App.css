@@ -18,6 +18,9 @@ body{
   font-size: 22px;
   margin: 20px 0 !important;
 }
+h2{
+  font-size: 28px;
+}
 .start-message{
   color: yellow;
   animation: blinkText 1s infinite;
@@ -143,6 +146,8 @@ body{
 .controls{
   position: absolute;
   bottom: 0 !important;
+  display: flex;
+  flex-direction: column;
   right: 0 !important;
 }
 .center-buttons{
@@ -312,4 +317,187 @@ body{
   border-top-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 15px !important;
+}
+.custom-list {
+  list-style: none; /* Remove default bullets */
+  padding-left: 0;
+}
+
+.custom-list li {
+  position: relative;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.custom-list li::before {
+  content: ""; /* Replace with your icon path */
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 30px !important; /* Adjust size as needed */
+  height: 30px !important;
+  background-image: url('/bullet.png'); /* Path to your icon image */
+  transform: rotate(-90deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+
+@media(max-width:767px){
+  .landing-header{
+    flex-direction: column;
+    gap: 0 !important;
+  }
+  .landing-header h2{
+    font-size: 20px !important;
+
+  }
+  .logo{
+    width: 50% !important;
+    height: 60% !important;
+    
+  }
+  .buttons{
+    width: 100% !important;
+  }
+  p{
+    font-size: 16px !important;
+  }
+  .moving-icon,.moving-icon2,.moving-icon3{
+    width: 70px !important;
+    height: 70px !important;
+    position: absolute;
+  }
+  .moving-icon{
+    left: 20px; 
+    top: 20px;
+  }
+  .moving-icon2{
+    position: absolute;
+    bottom: 50%;
+    right: 20px;
+  }
+  .moving-icon3{
+    position: absolute;
+    bottom: 50%;
+    left: 20px;
+  }
+  .controls{
+    position: relative !important;
+  }
+  .info{
+    flex-direction: column;
+    gap: 0 !important;
+  }
+}
+@media(min-width:768px){
+  .moving-icon {
+    width: 100px;
+    height: 100px;
+    background-color: #bf4141;
+    opacity:1;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 150px;
+    animation: MoveUpDown 10s linear infinite;
+  }
+  .moving-icon2 {
+    width: 70px;
+    height: 70px;
+    /* background-color: #bf4141; */
+    opacity:1;
+    /* border-radius: 50%; */
+    position: absolute;
+    bottom: 100px;
+    right: 150px;
+    animation: MoveUpDownTwo 10s linear infinite;
+  }
+  .moving-icon3 {
+    width: 70px;
+    height: 70px;
+    /* background-color: #bf4141; */
+    opacity:1;
+    /* border-radius: 50%; */
+    position: absolute;
+    top: 100px;
+    right: 300px;
+    animation: MoveUpDownThree 10s linear infinite;
+  }
+  @keyframes MoveUpDownTwo {
+    0%, 100% {
+      right: 5%;
+    }
+    50% {
+      bottom: 40%;
+    }
+  }
+  @keyframes MoveUpDownThree {
+    0%, 100% {
+      right: 20%;
+    }
+    50% {
+      top: 40%;
+    }
+  }
+  @keyframes a-one {
+    from { top: 0; left: 0; }
+    to   { top: 100px; left: 100px; }
+  }
+  
+  @keyframes MoveUpDown {
+    0%, 100% {
+      bottom: 100px;
+    }
+    50% {
+      bottom: 40%;
+    }
+  }
+  
+  @keyframes shake { 
+    0% {
+      transform: translate3d( 0px, 0px, 0px);
+      animation-timing-function: ease;
+    } 
+    25% {
+      transform: translate3d( 50px, 10px, 0px); 
+      animation-timing-function: ease; 
+    } 
+    25% {
+      transform: translate3d( 50px, 50px, 0px); 
+      animation-timing-function: ease; 
+    } 
+    75% {
+      transform: translate3d( 40px, -30px, 0px); 
+      animation-timing-function: ease; 
+    } 
+    100% {
+      transform: translate3d( 0px, 0px, 0px); 
+    }
+  }
+}
+
+.story{
+  width: 100%;
+  height:160vh;
+  object-fit: contain;
+}
+.back{
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  gap: 10px;
+}
+@media(max-width:767px){
+  .back{
+    top: 0 !important;
+    bottom: unset !important;
+    left: 0 !important;
+  }
 }
