@@ -42,9 +42,7 @@ function LandingPage() {
                     Time!</p>
             </div>
             <img className='moving-icon' style={{width: "100px", height: "100px"}} src="/icon.jpeg" alt=""/>
-            <a href="https://x.com/PumpMan_ai" target="_blank" rel="noopener noreferrer">
-                <img className='moving-icon2' style={{width: "100px", height: "100px"}} src="/icon2.jpeg" alt=""/>
-            </a>
+            <img className='moving-icon2' style={{width: "100px", height: "100px"}} src="/icon2.jpeg" alt=""/>
             <a href="https://t.me/pumpmanpump" target="_blank" rel="noopener noreferrer">
                 <img className='moving-icon3' style={{width: "100px", height: "100px"}} src="/icon3.jpeg" alt=""/>
             </a>
