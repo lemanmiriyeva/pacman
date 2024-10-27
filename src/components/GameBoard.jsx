@@ -23,6 +23,7 @@ const GameBoard = () => {
 
   const [ghostsExitBox, setGhostsExitBox] = useState(false); 
 
+  document.getElementsByTagName("body")[0].classList.add("pacman-body")
   const getValidMoves = (ghost) => {
     const moves = [];
     const potentialMoves = [

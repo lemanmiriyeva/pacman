@@ -7,8 +7,23 @@ body{
   background-color: #000 !important;
   color: #fff !important;
   box-sizing: border-box;
-  overflow: hidden;
   font-family: "Poppins", serif;
+}
+.pacman-body{
+
+
+}
+@media(max-width:767px){
+  .pacman-body{
+    padding-top: 60px !important;
+
+  }
+}
+@media(min-width:768px){
+.pacman-body{
+  overflow: hidden;
+
+}
 }
 .story-body{
   width: 100%;
