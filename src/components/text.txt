@@ -1,0 +1,602 @@
+// import React, { useState, useEffect } from 'react';
+// import Pacman from './Pacman';
+// import Ghost from './Ghost';
+// import { initializeGame, movePacman, collectDot, checkGameOver, isInRestrictedArea } from '../utils/gameLogic';
+// import { BOARD_SIZE, MAZE } from '../utils/constants';
+
+// const GameBoard = () => {
+//   const [gameState, setGameState] = useState(initializeGame());
+//   const [gameStarted, setGameStarted] = useState(false);
+//   const [direction, setDirection] = useState('RIGHT');
+//   const [gameWon, setGameWon] = useState(false);
+//   const [isInvincible, setIsInvincible] = useState(false);
+//   const [isDying, setIsDying] = useState(false);
+
+//   const getValidMoves = (ghost) => {
+//     const moves = [];
+//     const potentialMoves = [
+//       { x: ghost.x, y: ghost.y - 1 }, // UP
+//       { x: ghost.x, y: ghost.y + 1 }, // DOWN
+//       { x: ghost.x - 1, y: ghost.y }, // LEFT
+//       { x: ghost.x + 1, y: ghost.y }, // RIGHT
+//     ];
+  
+//     for (const move of potentialMoves) {
+//       if (
+//         move.x >= 0 &&
+//         move.x < BOARD_SIZE &&
+//         move.y >= 0 &&
+//         move.y < BOARD_SIZE &&
+//         MAZE[move.y][move.x] !== 1 && // No walls
+//         !isInRestrictedArea(move.x, move.y) // Exclude restricted area
+//       ) {
+//         moves.push(move);
+//       }
+//     }
+  
+//     return moves;
+//   };
+
+//   // Function to move ghosts
+//   const moveGhosts = (ghosts) => {
+//     return ghosts.map((ghost) => {
+//       const validMoves = getValidMoves(ghost);
+//       if (validMoves.length === 0) return ghost; // No valid moves, stay put
+
+//       // Randomly select one of the valid moves
+//       const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+      
+//       // Move the ghost to the selected position
+//       return {
+//         ...ghost,
+//         x: randomMove.x,
+//         y: randomMove.y,
+//       };
+//     });
+//   };
+
+//   // Automatically move ghosts at intervals
+//   useEffect(() => {
+//     let ghostInterval;
+
+//     if (gameStarted && !gameState.gameOver && !gameWon && !isDying) {
+//       ghostInterval = setInterval(() => {
+//         setGameState((prevState) => ({
+//           ...prevState,
+//           ghosts: moveGhosts(prevState.ghosts),
+//         }));
+//       }, 500);
+//     }
+
+//     return () => clearInterval(ghostInterval);
+//   }, [gameStarted, gameState.gameOver, gameWon, isDying]);
+
+//   // Handle keyboard input
+//   useEffect(() => {
+//     const handleKeyPress = (event) => {
+//       if (gameState.gameOver || gameWon || isDying) return;
+
+//       switch (event.key) {
+//         case 'ArrowUp':
+//           setDirection('UP');
+//           break;
+//         case 'ArrowDown':
+//           setDirection('DOWN');
+//           break;
+//         case 'ArrowLeft':
+//           setDirection('LEFT');
+//           break;
+//         case 'ArrowRight':
+//           setDirection('RIGHT');
+//           break;
+//         case ' ':
+//           if (!gameStarted) {
+//             setGameStarted(true);
+//           }
+//           break;
+//         default:
+//           return;
+//       }
+//     };
+
+//     window.addEventListener('keydown', handleKeyPress);
+//     return () => {
+//       window.removeEventListener('keydown', handleKeyPress);
+//     };
+//   }, [gameStarted, gameState, gameWon, isDying]);
+
+//   // Move Pacman automatically
+//   useEffect(() => {
+//     let interval;
+//     if (gameStarted && !gameState.gameOver && !gameWon && !isDying) {
+//       interval = setInterval(() => {
+//         movePacmanAutomatically();
+//       }, 150);
+//     }
+//     return () => clearInterval(interval);
+//   }, [gameStarted, direction, gameState, gameWon, isDying]);
+
+// const movePacmanAutomatically = () => {
+//     if (gameState.gameOver || isInvincible) return;
+
+//     // Calculate new position based on direction
+//     let newPosition = { ...gameState.pacmanPosition };
+
+//     switch (direction) {
+//         case 'UP':
+//             newPosition.y = Math.max(0, newPosition.y - 1); // Prevent moving off the top
+//             break;
+//         case 'DOWN':
+//             newPosition.y = Math.min(BOARD_SIZE - 1, newPosition.y + 1); // Prevent moving off the bottom
+//             break;
+//         case 'LEFT':
+//             newPosition.x = Math.max(0, newPosition.x - 1); // Prevent moving off the left
+//             break;
+//         case 'RIGHT':
+//             newPosition.x = Math.min(BOARD_SIZE - 1, newPosition.x + 1); // Prevent moving off the right
+//             break;
+//         default:
+//             return; // If direction is invalid, do nothing
+//     }
+
+//     // Check if the new position is a wall (1) or restricted area (2)
+//     if (MAZE[newPosition.y][newPosition.x] === 1 || MAZE[newPosition.y][newPosition.x] === 2) {
+//         return; // Exit early, do not update position
+//     }
+
+//     const newDots = collectDot(newPosition, gameState.dots);
+//     const updatedLives = checkGameOver(newPosition, gameState.ghosts, gameState.lives, isInvincible);
+
+//     if (updatedLives < gameState.lives) {
+//         setIsDying(true); // Trigger dying animation
+//         setIsInvincible(true);
+//         setDirection("RIGHT");
+
+//         setTimeout(() => {
+//             setGameState((prevState) => ({
+//                 ...prevState,
+//                 pacmanPosition: prevState.initialPacmanPosition,
+//                 lives: updatedLives,
+//             }));
+//             setIsInvincible(false);
+//             setIsDying(false);
+//         }, 3000);
+//         return; // Exit early to prevent further updates this turn
+//     } else {
+//         setGameState((prevState) => ({
+//             ...prevState,
+//             pacmanPosition: newPosition,
+//             dots: newDots,
+//             score: prevState.score + (gameState.dots.length - newDots.length),
+//             lives: updatedLives,
+//         }));
+//     }
+
+//     if (updatedLives === 0) {
+//         setGameState((prevState) => ({
+//             ...prevState,
+//             gameOver: true,
+//         }));
+//     }
+
+//     if (newDots.length === 0) {
+//         setGameWon(true);
+//     }
+// };
+
+
+
+//   const resetGame = () => {
+//     setGameState(initializeGame());
+//     setGameStarted(false);
+//     setDirection('RIGHT');
+//     setGameWon(false);
+//   };
+  
+
+//   return (
+//     <div>
+//       <div className="game-board" style={{ display: 'grid', gridTemplateColumns: `repeat(${BOARD_SIZE}, 20px)`, gridTemplateRows: `repeat(${BOARD_SIZE}, 20px)` }}>
+//         {Array.from({ length: BOARD_SIZE * BOARD_SIZE }).map((_, index) => {
+//           const x = index % BOARD_SIZE;
+//           const y = Math.floor(index / BOARD_SIZE);
+//           const isPacman = x === gameState.pacmanPosition.x && y === gameState.pacmanPosition.y;
+//           const isGhost = gameState.ghosts.some(ghost => ghost.x === x && ghost.y === y);
+//           const isDot = gameState.dots.some(dot => dot.x === x && dot.y === y);
+//           const isWall = MAZE[y][x] === 1;
+//           const wallClasses = [];
+
+// if (isWall) {
+//   // Check for individual walls
+//   const hasTop = y > 0 && MAZE[y - 1][x] === 1;
+//   const hasRight = x < BOARD_SIZE - 1 && MAZE[y][x + 1] === 1;
+//   const hasBottom = y < BOARD_SIZE - 1 && MAZE[y + 1][x] === 1;
+//   const hasLeft = x > 0 && MAZE[y][x - 1] === 1;
+
+//   // Add single-wall classes if there are no walls in certain directions
+//   if (!hasTop) wallClasses.push("wall-top");
+//   if (!hasRight) wallClasses.push("wall-right");
+//   if (!hasBottom) wallClasses.push("wall-bottom");
+//   if (!hasLeft) wallClasses.push("wall-left");
+
+//   // Add corner classes based on adjacent walls
+//   if (hasTop && hasLeft) wallClasses.push("wall-corner-top-left");
+//   if (hasTop && hasRight) wallClasses.push("wall-corner-top-right");
+//   if (hasBottom && hasLeft) wallClasses.push("wall-corner-bottom-left");
+//   if (hasBottom && hasRight) wallClasses.push("wall-corner-bottom-right");
+// }
+//           return (
+//             <div key={index} className={`cell ${isWall ? `wall ${wallClasses.join(" ")}` : ""}`} style={{
+//               width: '20px',
+//               height: '20px',
+//               // border: isWall ? '1px solid blue' : 'none',
+//               position: 'relative',
+//               backgroundColor: isWall ? '#000' : 'transparent'
+//             }}>
+//               {isPacman && <Pacman position={gameState.pacmanPosition} isInvincible={isInvincible} direction={direction} />}
+//               {isGhost && gameState.ghosts.map((ghost, ghostIndex) => (
+//                 ghost.x === x && ghost.y === y ? (
+//                   <Ghost key={ghostIndex} image={ghost.image} />
+//                 ) : null
+//               ))}
+//               {isDot && (
+//                 <div style={{
+//                   backgroundColor: 'yellow',
+//                   borderRadius: '50%',
+//                   width: '5px',
+//                   height: '5px',
+//                   position: 'absolute',
+//                   top: '50%',
+//                   left: '50%',
+//                   transform: 'translate(-50%, -50%)',
+//                   zIndex: 1,
+//                 }} />
+//               )}
+//               {isDying && isPacman && (
+//                 <div className="dying-animation" style={{
+//                   position: 'absolute',
+//                   top: 0,
+//                   left: 0,
+//                   width: '20px',
+//                   height: '20px',
+//                   backgroundColor: 'red', // Change this to whatever color or effect you want
+//                   borderRadius: '50%',
+//                   animation: 'die-animation 1s forwards', // CSS animation class
+//                 }} />
+//               )}
+//             </div>
+//           );
+//         })}
+//       </div>
+
+//       <div className="controls" style={{ marginTop: '20px' }}>
+//         <button onClick={() => setDirection('UP')}>Up</button>
+//         <div>
+//           <button onClick={() => setDirection('LEFT')}>Left</button>
+//           <button onClick={() => setDirection('RIGHT')}>Right</button>
+//         </div>
+//         <button onClick={() => setDirection('DOWN')}>Down</button>
+//       </div>
+
+//       {!gameStarted && <div className="start-message">Press Space to Start</div>}
+//       score:{gameState.score}
+//       <div className="lives">Lives: {gameState.lives}</div>
+//       {gameState.gameOver && (
+//         <div className="game-over">
+//           Game Over! Your score: {gameState.score}
+         
+//         </div>
+//       )}
+//       {gameWon && <div className="win-message">You Win! Your score: {gameState.score}</div>}
+//     </div>
+//   );
+// };
+
+// export default GameBoard;
+
+
+
+// import { BOARD_SIZE, MAZE } from './constants';
+// import { getDotsFromMaze } from './constants';
+// import { GHOSTS } from './constants'; 
+
+// export const initializeGame = () => {
+//   return {
+//     pacmanPosition: { x: 1, y: 1 }, // Starting position
+//     initialPacmanPosition: { x: 1, y: 1 }, // To reset when lives are lost
+//     dots: getDotsFromMaze(),
+//     ghosts: GHOSTS,
+//     score: 0,
+//     gameOver: false,
+//     lives: 3 // Initial number of lives
+//   };
+// };
+
+// export const movePacman = (position, direction) => {
+//   let newPosition = { ...position };
+
+//   switch (direction) {
+//       case 'UP':
+//           newPosition.y -= 1;
+//           break;
+//       case 'DOWN':
+//           newPosition.y += 1;
+//           break;
+//       case 'LEFT':
+//           newPosition.x -= 1;
+//           break;
+//       case 'RIGHT':
+//           newPosition.x += 1;
+//           break;
+//       default:
+//           break;
+//   }
+
+//   // Check for walls in the MAZE
+//   if (MAZE[newPosition.y][newPosition.x] === 1) {
+//       return position; // Return original position if trying to move into a wall
+//   }
+
+//   // Prevent Pacman from entering the restricted area
+//   if (isInRestrictedArea(newPosition.x, newPosition.y)) {
+//       return position; // Return original position if trying to enter restricted area
+//   }
+
+//   return newPosition;
+// };
+
+// // Function to check if a position is in the restricted area
+// export const isInRestrictedArea = (x, y) => {
+//   return x >= 8 && x <= 12 && y >= 8 && y <= 12;
+// };
+// export const collectDot = (position, dots) => {
+//   return dots.filter(dot => !(dot.x === position.x && dot.y === position.y));
+// };
+
+// export const checkGameOver = (pacmanPosition, ghosts, lives, isInvincible) => {
+//   if (isInvincible) return lives; // If Pacman is invincible, no lives lost
+
+//   // Check for collision with ghosts in the same cell
+//   const collisionDetected = ghosts.some(ghost => 
+//     ghost.x === pacmanPosition.x && ghost.y === pacmanPosition.y // Check if Pacman is in the same cell as any ghost
+//   );
+
+//   return collisionDetected ? lives - 1 : lives; // Lose a life if there's a collision
+// };
+
+
+
+
+/* .game-board {
+  max-width: max-content;
+  margin: 0 auto;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+body{
+  background-color: #fff;
+  color: #000 !important;
+  font-family: "Poppins", serif;
+}
+.ghost,.pacman{
+  z-index: 10000000000 !important;
+}
+.start-message,
+.game-over,
+.win-message {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.score {
+  text-align: center;
+  font-size: 20px;
+}
+
+.cell {
+  position: relative;
+}
+
+.pacman {
+  background-color: yellow;
+}
+
+.ghost {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pacman__eye {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  top: 2px;
+  left:5px;
+  background: #333333;
+}
+
+.pacman__mouth {
+  background: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  animation-name: eat;
+  animation-duration: 0.7s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes eat {
+  0% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+  25% {
+    clip-path: polygon(100% 60%, 44% 48%, 100% 40%);
+  }
+  50% {
+    clip-path: polygon(100% 50%, 44% 48%, 100% 50%);
+  }
+  75% {
+   clip-path: polygon(100% 59%, 44% 48%, 100% 35%);
+  }
+  100% {
+   clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+}
+.game-board {
+  max-width: max-content;
+  background-color: #fff;
+  border: 5px solid #fff; /* Dark blue border for the maze */
+  padding: 10px;
+}
+
+.cell {
+  position: relative;
+  border: 1px solid #000080; /* Set base border for all cells */
+  background-color: #000; /* Background for non-wall cells */
+}
+
+.cell.wall {
+  border-width: 0.5px; /* Make wall lines thinner */
+  background: linear-gradient(145deg, #000080, #0000ff); /* Add a 3D effect to walls */
+}
+
+
+.cell .dot {
+  background-color: yellow;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px yellow; /* Glow effect for dots */
+}
+
+.game-over, .win-message {
+  text-align: center;
+  font-size: 30px;
+  color: red;
+  animation: blinkText 1.5s infinite;
+}
+
+@keyframes blinkText {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.control-button{
+  background: transparent;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 36px;
+}
+.controls{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.center-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.main-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.score, .lives {
+ display: block;
+ font-size: 24px;
+}
+@keyframes die-animation {
+  from {
+      transform: scale(1);
+      opacity: 1;
+  }
+  to {
+      transform: scale(0.5);
+      opacity: 0; /* Fade out */
+  }
+}
+
+.dying-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: red; /* Change this to customize the dying color */
+  border-radius: 50%; /* Make it round */
+  width: 20px; /* Match Pacman's size */
+  height: 20px; /* Match Pacman's size */
+} */
+
+  const getWallClasses = (x, y) => {
+    const isWall = MAZE[y][x] === 1;
+    if (!isWall) return '';
+  
+    const isOuterWall = (x === 0 || y === 0 || x === MAZE[0].length - 1 || y === MAZE.length - 1);
+    const classes = [];
+  
+    const maxY = MAZE.length - 1;
+    const maxX = MAZE[0].length - 1;
+  
+    // Safe neighbor checks
+    const cellAbove = y > 0 ? MAZE[y - 1][x] : null;
+    const cellBelow = y < maxY ? MAZE[y + 1][x] : null;
+    const cellLeft = x > 0 ? MAZE[y][x - 1] : null;
+    const cellRight = x < maxX ? MAZE[y][x + 1] : null;
+  
+    // Check for outer wall corners surrounded by '3'
+    const isOuterTopLeftCorner = isOuterWall && x === 0 && y === 0 && cellBelow === 3 && cellRight === 3;
+    const isOuterTopRightCorner = isOuterWall && x === maxX && y === 0 && cellBelow === 3 && cellLeft === 3;
+    const isOuterBottomLeftCorner = isOuterWall && x === 0 && y === maxY && cellAbove === 3 && cellRight === 3;
+    const isOuterBottomRightCorner = isOuterWall && x === maxX && y === maxY && cellAbove === 3 && cellLeft === 3;
+  
+    if (isOuterTopLeftCorner) classes.push('outer-corner-top-left');
+    if (isOuterTopRightCorner) classes.push('outer-corner-top-right');
+    if (isOuterBottomLeftCorner) classes.push('outer-corner-bottom-left');
+    if (isOuterBottomRightCorner) classes.push('outer-corner-bottom-right');
+  
+    // Check for inner wall start/end only for segments surrounded by 0 or 3
+    const isStartOfHorizontalWall =
+      (x === 0 || [0, 3].includes(cellLeft)) && cellRight === 1;
+    const isEndOfHorizontalWall =
+      (x === maxX || [0, 3].includes(cellRight)) && cellLeft === 1;
+  
+    const isStartOfVerticalWall =
+      (y === 0 || [0, 3].includes(cellAbove)) && cellBelow === 1;
+    const isEndOfVerticalWall =
+      (y === maxY || [0, 3].includes(cellBelow)) && cellAbove === 1;
+  
+    // Apply inner wall classes only
+    if (!isOuterWall) {
+      if (isStartOfHorizontalWall) classes.push('wall-first-horizontal');
+      if (isEndOfHorizontalWall) classes.push('wall-last-horizontal');
+      if (isStartOfVerticalWall) classes.push('wall-first-vertical');
+      if (isEndOfVerticalWall) classes.push('wall-last-vertical');
+    }
+  
+    // Inner corners detection for walls
+    const isTopLeftCorner = isStartOfHorizontalWall && isStartOfVerticalWall;
+    const isTopRightCorner = isEndOfHorizontalWall && isStartOfVerticalWall;
+    const isBottomLeftCorner = isStartOfHorizontalWall && isEndOfVerticalWall;
+    const isBottomRightCorner = isEndOfVerticalWall && isEndOfHorizontalWall;
+  
+    if (isTopLeftCorner) classes.push('corner-top-left');
+    if (isTopRightCorner) classes.push('corner-top-right');
+    if (isBottomLeftCorner) classes.push('corner-bottom-left');
+    if (isBottomRightCorner) classes.push('corner-bottom-right');
+  
+    return classes.join(' ');
+  };

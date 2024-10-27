@@ -1,0 +1,315 @@
+.game-board {
+  max-width: max-content;
+  margin: 0 auto;
+  background-color: #000 !important;
+}
+body{
+  background-color: #000 !important;
+  color: #fff !important;
+  font-family: "Poppins", serif;
+}
+.ghost,.pacman{
+  z-index: 10000000000 !important;
+}
+.start-message,
+.game-over,
+.win-message {
+  text-align: center;
+  font-size: 22px;
+  margin: 20px 0 !important;
+}
+.start-message{
+  color: yellow;
+  animation: blinkText 1s infinite;
+}
+.start-message span{
+  padding: 10px 20px; border: 2px solid yellow; border-radius: 10px;
+  
+}
+.score {
+  text-align: center;
+  font-size: 20px;
+}
+
+.cell {
+  position: relative;
+}
+
+.pacman {
+  background-color: yellow;
+}
+
+.ghost {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+}
+
+
+.pacman__eye {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  top: 2px;
+  left:5px;
+  background: #333333;
+}
+
+.pacman__mouth {
+  background: #000 !important;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  animation-name: eat;
+  animation-duration: 0.7s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes eat {
+  0% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+  25% {
+    clip-path: polygon(100% 60%, 44% 48%, 100% 40%);
+  }
+  50% {
+    clip-path: polygon(100% 50%, 44% 48%, 100% 50%);
+  }
+  75% {
+   clip-path: polygon(100% 59%, 44% 48%, 100% 35%);
+  }
+  100% {
+   clip-path: polygon(100% 74%, 44% 48%, 100% 21%);
+  }
+}
+.game-board {
+  max-width: max-content;
+  background-color: #000 !important;
+  border: 5px solid #fff; /* Dark blue border for the maze */
+  padding: 20px;
+}
+
+.cell {
+  position: relative;
+}
+
+.cell.wall {
+  border-width: 0.5px; /* Make wall lines thinner */
+  /* background: linear-gradient(145deg, #000080, #0000ff); Add a 3D effect to walls */
+  background: #000080;
+}
+
+
+.cell .dot {
+  background-color: yellow;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px yellow; /* Glow effect for dots */
+}
+
+.game-over, .win-message {
+  text-align: center;
+  font-size: 30px;
+  animation: blinkText 1s infinite;
+}
+
+.game-over{
+  color: red;
+
+}
+.win-message{
+  color: green;
+}
+@keyframes blinkText {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.control-button{
+  background: transparent;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 36px;
+}
+.controls{
+  position: absolute;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+.center-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0 !important;
+}
+.main-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.score, .lives {
+ display: block;
+ font-size: 24px;
+}
+@keyframes die-animation {
+  from {
+      transform: scale(1);
+      opacity: 1;
+  }
+  to {
+      transform: scale(0.5);
+      opacity: 0 !important; /* Fade out */
+  }
+}
+
+.dying-animation {
+  position: absolute;
+  top: 0 !important;
+  left: 0 !important;
+  background-color: red; /* Change this to customize the dying color */
+  border-radius: 50%; /* Make it round */
+  width: 20px; /* Match Pacman's size */
+  height: 20px; /* Match Pacman's size */
+}
+
+
+
+
+.wall-last-horizontal{
+  border-top-right-radius: 20px;
+  border-top-left-radius: 0 ;
+  border-bottom-right-radius: 20px ;
+  border-bottom-left-radius: 0 ;
+}
+
+.wall-first-horizontal{
+  border-top-right-radius: 0;
+  border-top-left-radius: 20px ;
+  border-bottom-right-radius: 0 ;
+  border-bottom-left-radius: 20px ;
+}
+
+
+.wall-first-vertical{
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px ;
+  border-bottom-right-radius: 0 ;
+  border-bottom-left-radius: 0 ;
+}
+
+.wall-last-vertical{
+  border-top-right-radius: 0;
+  border-top-left-radius: 0 ;
+  border-bottom-right-radius: 20px ;
+  border-bottom-left-radius: 20px ;
+}
+
+.corner-top-left {
+  border-top-left-radius: 20px;
+}
+
+.corner-top-right {
+  border-top-right-radius: 20px;
+}
+
+.corner-bottom-left {
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.corner-bottom-right {
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+.inner-corner-top-left {
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.inner-corner-top-right {
+  border-top-right-radius: 20px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+.inner-corner-bottom-left {
+  border-bottom-left-radius: 20px !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.inner-corner-bottom-right {
+  border-bottom-right-radius: 20px !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.outer-corner-top-left {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.outer-corner-top-right {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.outer-corner-bottom-right {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 15px !important;
+  border-bottom-left-radius: 0 !important;
+}
+.outer-corner-bottom-left {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 15px !important;
+}
+
+/* Other outer corner styles... */
+.corner-top-left {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.corner-top-right {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.corner-bottom-right {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 15px !important;
+  border-bottom-left-radius: 0 !important;
+}
+.corner-bottom-left {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 15px !important;
+}
