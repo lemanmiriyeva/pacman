@@ -434,7 +434,7 @@ h2{
   .moving-icon {
     width: 100px;
     height: 100px;
-    background-color: #bf4141;
+    /*background-color: #bf4141;*/
     opacity:1;
     border-radius: 50%;
     position: absolute;
@@ -451,6 +451,17 @@ h2{
     position: absolute;
     top: 50px;
     left: 150px;
+    animation: MoveUpDownThree 10s linear infinite;
+  }
+  .moving-icon5 {
+    width: 100px;
+    height: 100px;
+    background-color: #bf4141;
+    opacity:1;
+    border-radius: 50%;
+    position: absolute;
+    top: 150px;
+    left: 300px;
     animation: MoveUpDownThree 10s linear infinite;
   }
   .moving-icon2 {

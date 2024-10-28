@@ -30,7 +30,7 @@ function LandingPage() {
                     <h2 style={{marginTop: "0", color: "#fff"}}>00</h2>
                 </div>
             </div>
-            <p style={{fontSize: "24px", textAlign: "center"}}>PumpMan: Chompong Through Fear,more Candy at a
+            <p style={{fontSize: "24px", textAlign: "center"}}>PumpMan: Chompong Through Fear, more Candy at a
                 Time!</p>
             <img className='logo' style={{width: "25%", height: "25%"}} src="/logo1.jpeg" alt=""/>
             <div className='buttons' style={{display: "flex", flexDirection: "column", width: "35%"}}>
@@ -43,12 +43,13 @@ function LandingPage() {
                 <p style={{fontSize: "24px", textAlign: "center"}}>Join us on PumpFun at 8 PM UTC on 30th November for
                     the epic launch of PumpMan—an arcade adventure where thrills, chills, and power-ups await! 🎃💥</p>
             </div>
-            <img className='moving-icon' style={{width: "100px", height: "100px"}} src="/icon.jpeg" alt=""/>
+            <img className='moving-icon' style={{width: "100px", height: "100px"}} src="/pill.png" alt=""/>
+            <img className='moving-icon5' style={{width: "100px", height: "100px"}} src="/icon.jpeg" alt=""/>
             <img className='moving-icon4' style={{width: "100px", height: "100px"}} src="/bird.jpg" alt=""/>
-            <a href="https://x.com/PumpMan_ai" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/pumpman_sol" target="_blank" rel="noopener noreferrer">
                 <img className='moving-icon2' style={{width: "100px", height: "100px"}} src="/icon2.jpeg" alt=""/>
             </a>
-            <a href="https://t.me/pumpmanpump" target="_blank" rel="noopener noreferrer">
+            <a href="https://t.me/pumpman_sol" target="_blank" rel="noopener noreferrer">
                 <img className='moving-icon3' style={{width: "100px", height: "100px"}} src="/icon3.jpeg" alt=""/>
             </a>
         </div>
