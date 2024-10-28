@@ -439,8 +439,19 @@ h2{
     border-radius: 50%;
     position: absolute;
     bottom: 0;
-    left: 150px;
+    left: 250px;
     animation: MoveUpDown 10s linear infinite;
+  }
+  .moving-icon4 {
+    width: 100px;
+    height: 100px;
+    background-color: #bf4141;
+    opacity:1;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    left: 150px;
+    animation: MoveUpDownThree 10s linear infinite;
   }
   .moving-icon2 {
     width: 70px;

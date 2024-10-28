@@ -40,9 +40,11 @@ function LandingPage() {
                     <li><Link style={{color: "white", textDecoration: "none"}} to="/story1">Story</Link></li>
 
                 </ul>
-                <p style={{fontSize: "24px", textAlign: "center"}}>Join us on PumpFun at 8 PM UTC on 30th November for the epic launch of PumpMan—an arcade adventure where thrills, chills, and power-ups await! 🎃💥</p>
+                <p style={{fontSize: "24px", textAlign: "center"}}>Join us on PumpFun at 8 PM UTC on 30th November for
+                    the epic launch of PumpMan—an arcade adventure where thrills, chills, and power-ups await! 🎃💥</p>
             </div>
             <img className='moving-icon' style={{width: "100px", height: "100px"}} src="/icon.jpeg" alt=""/>
+            <img className='moving-icon4' style={{width: "100px", height: "100px"}} src="/bird.jpg" alt=""/>
             <a href="https://x.com/PumpMan_ai" target="_blank" rel="noopener noreferrer">
                 <img className='moving-icon2' style={{width: "100px", height: "100px"}} src="/icon2.jpeg" alt=""/>
             </a>
