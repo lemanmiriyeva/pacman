@@ -30,6 +30,8 @@ function LandingPage() {
                     <h2 style={{marginTop: "0", color: "#fff"}}>00</h2>
                 </div>
             </div>
+            <p style={{fontSize: "24px", textAlign: "center"}}>PumpMan: Chompong Through Fear,more Candy at a
+                Time!</p>
             <img className='logo' style={{width: "25%", height: "25%"}} src="/logo1.jpeg" alt=""/>
             <div className='buttons' style={{display: "flex", flexDirection: "column", width: "35%"}}>
 
@@ -38,8 +40,7 @@ function LandingPage() {
                     <li><Link style={{color: "white", textDecoration: "none"}} to="/story1">Story</Link></li>
 
                 </ul>
-                <p style={{fontSize: "24px", textAlign: "center"}}>PumpMan: Chompong Through Fear,more Candy at a
-                    Time!</p>
+                <p style={{fontSize: "24px", textAlign: "center"}}>Join us on PumpFun at 8 PM UTC on 30th November for the epic launch of PumpMan—an arcade adventure where thrills, chills, and power-ups await! 🎃💥</p>
             </div>
             <img className='moving-icon' style={{width: "100px", height: "100px"}} src="/icon.jpeg" alt=""/>
             <a href="https://x.com/PumpMan_ai" target="_blank" rel="noopener noreferrer">
