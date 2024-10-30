@@ -46,7 +46,7 @@ function LandingPage() {
             <img className='moving-icon' style={{width: "100px", height: "100px"}} src="/pill.png" alt=""/>
             <img className='moving-icon5' style={{width: "100px", height: "100px"}} src="/icon.jpeg" alt=""/>
             <img className='moving-icon4' style={{width: "100px", height: "100px"}} src="/bird.jpg" alt=""/>
-            <a href="https://x.com/pumpman_sol" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/pumpman_onsol" target="_blank" rel="noopener noreferrer">
                 <img className='moving-icon2' style={{width: "100px", height: "100px"}} src="/icon2.jpeg" alt=""/>
             </a>
             <a href="https://t.me/pumpman_sol" target="_blank" rel="noopener noreferrer">
