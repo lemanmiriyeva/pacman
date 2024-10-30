@@ -40,7 +40,7 @@ function LandingPage() {
                     <li><Link style={{color: "white", textDecoration: "none"}} to="/story1">Story</Link></li>
 
                 </ul>
-                <p style={{fontSize: "24px", textAlign: "center"}}>Join us on PumpFun at 8 PM UTC on 30th November for
+                <p style={{fontSize: "24px", textAlign: "center"}}>Join us on PumpFun at 10 PM UTC on 30th November for
                     the epic launch of PumpMan—an arcade adventure where thrills, chills, and power-ups await! 🎃💥</p>
             </div>
             <img className='moving-icon' style={{width: "100px", height: "100px"}} src="/pill.png" alt=""/>
