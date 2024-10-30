@@ -422,6 +422,11 @@ h2{
     bottom: 50%;
     left: 20px;
   }
+  .moving-icon4{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
   .controls{
     position: relative !important;
   }
@@ -434,13 +439,35 @@ h2{
   .moving-icon {
     width: 100px;
     height: 100px;
-    background-color: #bf4141;
+    /*background-color: #bf4141;*/
     opacity:1;
     border-radius: 50%;
     position: absolute;
     bottom: 0;
-    left: 150px;
+    left: 250px;
     animation: MoveUpDown 10s linear infinite;
+  }
+  .moving-icon4 {
+    width: 100px;
+    height: 100px;
+    background-color: #bf4141;
+    opacity:1;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    left: 150px;
+    animation: MoveUpDownThree 10s linear infinite;
+  }
+  .moving-icon5 {
+    width: 100px;
+    height: 100px;
+    background-color: #bf4141;
+    opacity:1;
+    border-radius: 50%;
+    position: absolute;
+    top: 150px;
+    left: 300px;
+    animation: MoveUpDownThree 10s linear infinite;
   }
   .moving-icon2 {
     width: 70px;
